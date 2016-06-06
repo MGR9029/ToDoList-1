@@ -12,13 +12,6 @@
   </div>
   <input type="submit" value="add" />
 
-  <?php while ($row = $stt->fetch()) { ?>
-    <tr>
-      <td><?php print(e($row['memo'])); ?></td>
-
-      <td<a href="index.php?sid=<?php print(e($row['sid']))">編集<a/></td>
-    </tr>
-  <?php } ?>
 </p>
 </form>
 </body>
@@ -29,9 +22,9 @@ if(isset($_GET['add'])){
   //追加
   $item = $_GET['item'];
   $item = htmlspecialchars($item, ENT_QUOTES);
-  $error =""
+  $error = "";
   if($item === ""){
-    $error = "メモが入力されていません"
+      $error = "メモが入力されていません";
   } else {
     $sql = 'INSERT INTO list (item) VALUES (:item)';
     $stmt = $dbh->prepare($sql);
@@ -48,9 +41,9 @@ if(isset($_GET['add'])){
   unset($no);
 }
 //エラーメッセージ
-  catch(PDOException $e){
-    die('エラーメッセージ:'.$e->getMessage());
-  }
+//  catch(PDOException $e){
+//    die('エラーメッセージ:'.$e->getMessage();
+//  }
 
 $stt->bindValue(':memo', $_POST['memo']);
 $stt->exesute();
